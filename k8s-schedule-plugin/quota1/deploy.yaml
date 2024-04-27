@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: ks-quota
+  labels:
+    app: nginx
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+        quota.scheduling.koordinator.sh/name: "ks-quota1"
+        quota.scheduling.koordinator.sh/preemptible: "true"
+    spec:
+      schedulerName: koord-scheduler
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          limits:
+            cpu: 250m
+          requests:
+            cpu: 250m

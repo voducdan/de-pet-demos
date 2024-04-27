@@ -1,0 +1,38 @@
+# kubectl create ns quota1
+# kubectl create ns quota2
+# kubectl create ns quota3
+
+apiVersion: scheduling.x-k8s.io/v1alpha1
+kind: ElasticQuota
+metadata:
+  name: quota1
+  namespace: quota1
+spec:
+  max:
+    cpu: 4
+  min:
+    cpu: 1
+
+---
+apiVersion: scheduling.x-k8s.io/v1alpha1
+kind: ElasticQuota
+metadata:
+  name: quota2
+  namespace: quota2
+spec:
+  max:
+    cpu: 3
+  min:
+    cpu: 2
+
+---
+apiVersion: scheduling.x-k8s.io/v1alpha1
+kind: ElasticQuota
+metadata:
+  name: quota3
+  namespace: quota3
+spec:
+  max:
+    cpu: 2
+  min:
+    cpu: 1
